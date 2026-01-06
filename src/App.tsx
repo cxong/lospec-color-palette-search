@@ -14,7 +14,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    loadPalettes('/palettes.json')
+    loadPalettes(`${import.meta.env.BASE_URL}palettes.json`)
       .then(data => {
         setPalettes(data);
         setLoading(false);
