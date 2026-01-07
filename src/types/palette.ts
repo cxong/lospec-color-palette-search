@@ -5,6 +5,9 @@ export interface PaletteData {
   colors?: string[];
   colorsArray?: string[];
   numberOfColors: number;
+  author?: string;
+  description?: string;
+  tags?: string[];
 }
 
 export interface NormalizedPalette {
@@ -12,8 +15,12 @@ export interface NormalizedPalette {
   title: string;
   slug: string;
   colors: number[][];
+  hexColors: string[];
   numberOfColors: number;
   url: string;
+  author?: string;
+  description?: string;
+  tags?: string[];
 }
 
 export interface SearchResult {
@@ -22,4 +29,9 @@ export interface SearchResult {
   rss: number;
   colorPenalty: number;
   rank: number;
+}
+
+export interface ExactMatch {
+  paletteIndex: number;
+  colorIndex: number;
 }

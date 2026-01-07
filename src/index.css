@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    @apply bg-[#332f35] text-[#eaeaea];
+  }
+
+  body {
+    @apply bg-[#332f35] text-[#eaeaea];
+  }
+}
+
+@layer components {
+  .lospec-bg {
+    @apply bg-[#332f35];
+  }
+
+  .lospec-bg-secondary {
+    @apply bg-[#665f6c];
+  }
+
+  .lospec-text {
+    @apply text-[#eaeaea];
+  }
+
+  .lospec-text-secondary {
+    @apply text-[#bfbcc3];
+  }
+
+  .lospec-primary {
+    @apply text-[#e5e3e6];
+  }
+
+  .lospec-primary-bg {
+    @apply bg-[#e5e3e6];
+  }
+
+  .lospec-button {
+    @apply bg-[#e5e3e6] text-[#332f35] hover:bg-[#d9d7dc] transition-colors font-medium;
+  }
+}

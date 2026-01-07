@@ -62,3 +62,22 @@ export function calculateTotalDistance(
 
   return { totalDistance, rss, colorPenalty };
 }
+
+export function findExactMatches(
+  queryColors: number[][],
+  paletteColors: number[][]
+): Map<number, number> {
+  const matches = new Map<number, number>();
+
+  for (let qIdx = 0; qIdx < queryColors.length; qIdx++) {
+    for (let pIdx = 0; pIdx < paletteColors.length; pIdx++) {
+      const distance = euclideanDistance(queryColors[qIdx], paletteColors[pIdx]);
+      if (distance === 0) {
+        matches.set(qIdx, pIdx);
+        break;
+      }
+    }
+  }
+
+  return matches;
+}
