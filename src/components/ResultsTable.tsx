@@ -4,11 +4,21 @@ import { PalettePreview } from './PalettePreview';
 
 interface ResultsTableProps {
   results: SearchResult[];
+  queryColors?: number[][];
   onRowClick?: (palette: NormalizedPalette) => void;
   onColorClick?: (color: number[]) => void;
 }
 
-export function ResultsTable({ results, onRowClick, onColorClick }: ResultsTableProps) {
+export function ResultsTable({ results, queryColors = [], onRowClick, onColorClick }: ResultsTableProps) {
+  const getExactMatches = (paletteColors: number[][]) => {
+    const exactMatches = new Map<number, number>();
+    paletteColors.forEach((color, index) => {
+      if (queryColors.some(qc => qc[0] === color[0] && qc[1] === color[1] && qc[2] === color[2])) {
+        exactMatches.set(index, index);
+      }
+    });
+    return exactMatches;
+  };
   if (results.length === 0) {
     return (
       <div className="lospec-bg-secondary rounded-lg shadow-lg p-8 text-center border border-[#7a7380]">
@@ -68,6 +78,7 @@ export function ResultsTable({ results, onRowClick, onColorClick }: ResultsTable
                   <PalettePreview
                     colors={result.palette.colors}
                     size="small"
+                    exactMatches={getExactMatches(result.palette.colors)}
                     onColorClick={onColorClick}
                     interactive={!!onColorClick}
                   />

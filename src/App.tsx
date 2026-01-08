@@ -127,6 +127,7 @@ function App() {
                 )}
                 <ResultsTable
                   results={results}
+                  queryColors={queryColors}
                   onRowClick={setSelectedPalette}
                   onColorClick={(color) => {
                     if (!queryColors.some(c => c[0] === color[0] && c[1] === color[1] && c[2] === color[2])) {
