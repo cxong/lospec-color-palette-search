@@ -40,8 +40,9 @@ export function PalettePreview({
               backgroundColor: rgbToHex(color),
               minWidth: `${100 / colors.length}%`,
             }}
-            onClick={() => {
+            onClick={(e) => {
               if (interactive && onColorClick) {
+                e.stopPropagation();
                 onColorClick(color);
               }
             }}

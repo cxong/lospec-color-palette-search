@@ -125,7 +125,15 @@ function App() {
                     </h2>
                   </div>
                 )}
-                <ResultsTable results={results} onRowClick={setSelectedPalette} />
+                <ResultsTable
+                  results={results}
+                  onRowClick={setSelectedPalette}
+                  onColorClick={(color) => {
+                    if (!queryColors.some(c => c[0] === color[0] && c[1] === color[1] && c[2] === color[2])) {
+                      setQueryColors([...queryColors, color]);
+                    }
+                  }}
+                />
               </div>
             )}
           </SearchEngine>

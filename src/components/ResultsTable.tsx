@@ -5,9 +5,10 @@ import { PalettePreview } from './PalettePreview';
 interface ResultsTableProps {
   results: SearchResult[];
   onRowClick?: (palette: NormalizedPalette) => void;
+  onColorClick?: (color: number[]) => void;
 }
 
-export function ResultsTable({ results, onRowClick }: ResultsTableProps) {
+export function ResultsTable({ results, onRowClick, onColorClick }: ResultsTableProps) {
   if (results.length === 0) {
     return (
       <div className="lospec-bg-secondary rounded-lg shadow-lg p-8 text-center border border-[#7a7380]">
@@ -64,7 +65,12 @@ export function ResultsTable({ results, onRowClick }: ResultsTableProps) {
                   </div>
                 </td>
                 <td className="px-4 py-4">
-                  <PalettePreview colors={result.palette.colors} size="small" />
+                  <PalettePreview
+                    colors={result.palette.colors}
+                    size="small"
+                    onColorClick={onColorClick}
+                    interactive={!!onColorClick}
+                  />
                 </td>
                 <td className="px-4 py-4 text-sm lospec-text-secondary text-right">
                   {result.palette.numberOfColors}
