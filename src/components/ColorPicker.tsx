@@ -16,7 +16,10 @@ export function ColorPicker({
 }: ColorPickerProps) {
   const [currentColor, setCurrentColor] = useState('#e5e3e6');
 
-  const addColor = (rgb: number[]) => {
+  const addColor = (rgb: number[] | null) => {
+    if (rgb === null) {
+      return;
+    }
     if (!queryColors.some(c => c[0] === rgb[0] && c[1] === rgb[1] && c[2] === rgb[2])) {
       onQueryColorsChange([...queryColors, rgb]);
     }
@@ -98,7 +101,23 @@ export function ColorPicker({
               <div key={idx} className="mb-3">
                 <PalettePreview
                   colors={palette.colors}
-                  onColorClick={(color) => addColor(color)}
+                  queryColors={queryColors}
+                  onColorClick={(color) => {
+                    if (color === null) {
+                      const colorToRemove = palette.colors.find(c =>
+                        queryColors.some(qc => qc[0] === c[0] && qc[1] === c[1] && qc[2] === c[2])
+                      );
+                      if (colorToRemove) {
+                        onQueryColorsChange(
+                          queryColors.filter(qc =>
+                            !(qc[0] === colorToRemove[0] && qc[1] === colorToRemove[1] && qc[2] === colorToRemove[2])
+                          )
+                        );
+                      }
+                    } else {
+                      addColor(color);
+                    }
+                  }}
                   size="small"
                   interactive={true}
                 />

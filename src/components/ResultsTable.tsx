@@ -77,6 +77,7 @@ export function ResultsTable({ results, queryColors = [], onRowClick, onColorCli
                 <td className="px-4 py-4">
                   <PalettePreview
                     colors={result.palette.colors}
+                    queryColors={queryColors}
                     size="small"
                     exactMatches={getExactMatches(result.palette.colors)}
                     onColorClick={onColorClick}
